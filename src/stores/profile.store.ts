@@ -8,9 +8,8 @@ export const useProfileStore = defineStore('profile', () => {
 
   async function fetchProfile() {
     const { data } = await http.get<ProfileInterface>(API_ROUTES.profile)
-    const res = data
 
-    profile.value = res
+    profile.value = data
   }
 
   return { profile, fetchProfile }
