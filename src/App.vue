@@ -1,27 +1,11 @@
 <script setup lang="ts">
 import ProfileAvatar from '@/components/ProfileAvatar.vue'
-import { API_ROUTES } from '@/api.ts'
-import type { Profile } from '@/interfaces/profile.ts'
-import { onMounted, ref } from 'vue'
-
-const profile = ref<Profile>()
-
-async function fetchProfile() {
-  const data = await fetch(API_ROUTES.profile)
-  const res = await data.json()
-
-  profile.value = res
-}
-
-onMounted(() => {
-  fetchProfile()
-})
 </script>
 
 <template>
   <div class="app">
     <nav class="nav">
-      <ProfileAvatar v-if="profile" :name="profile.name" />
+      <ProfileAvatar />
     </nav>
     <main class="main">Content</main>
   </div>
