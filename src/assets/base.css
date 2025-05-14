@@ -18,11 +18,10 @@ body {
   min-height: 100vh;
   color: var(--color-fg);
   background: var(--color-bg);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
+  transition: color 0.5s,
+  background-color 0.5s;
   line-height: 1.6;
-  font-size: 15px;
+  font-size: 18px;
   font-family: "Roboto", sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
