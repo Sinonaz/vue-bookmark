@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useCategoriesStore } from '@/stores/categories.store.ts'
 import { onMounted } from 'vue'
+import ButtonIcon from '@/components/ButtonIcon.vue'
+import IconPlus from '@/components/icons/IconPlus.vue'
 
 const store = useCategoriesStore()
 
@@ -10,19 +12,29 @@ onMounted(() => {
 </script>
 
 <template>
-  <ul v-if="store.categories?.length">
-    <li v-for="category in store.categories" :key="category.id">
-      <a :href="`/${category.alias}`">{{ category.name }}</a>
-    </li>
-  </ul>
+  <div class="categories">
+    <ul v-if="store.categories?.length">
+      <li v-for="category in store.categories" :key="category.id">
+        <a :href="`/${category.alias}`">{{ category.name }}</a>
+      </li>
+    </ul>
+
+    <ButtonIcon @click="store.createCategory">
+      <IconPlus />
+    </ButtonIcon>
+  </div>
 </template>
 
 <style scoped>
+.categories {
+  margin-top: 40px;
+}
+
 ul {
   display: flex;
   flex-direction: column;
   gap: 34px;
-  margin: 40px 0;
+  margin-bottom: 40px;
   padding: 0;
   list-style: none;
   font-size: 14px;
