@@ -15,7 +15,9 @@ onMounted(() => {
   <div class="categories">
     <ul v-if="store.categories?.length">
       <li v-for="category in store.categories" :key="category.id">
-        <a :href="`/${category.alias}`">{{ category.name }}</a>
+        <RouterLink :to="`/main/${category.alias}`" active-class="active-link"
+          >{{ category.name }}
+        </RouterLink>
       </li>
     </ul>
 
@@ -50,6 +52,11 @@ a {
   color: inherit;
   text-decoration: none;
   transition: font-size 0.2s;
+
+  &.active-link {
+    font-size: 24px;
+    pointer-events: none;
+  }
 }
 
 a:hover {

@@ -22,6 +22,7 @@ import CategoryList from '@/components/CategoryList.vue'
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 100px;
+  width: 100%;
   padding: 140px 120px;
 }
 

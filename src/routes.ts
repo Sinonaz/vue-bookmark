@@ -11,6 +11,17 @@ export const router = createRouter({
       path: '/main',
       name: 'main',
       component: () => import('@/views/MainView.vue'),
+      children: [
+        {
+          path: '',
+          name: 'index',
+          component: () => import('@/views/IndexView.vue'),
+        },
+        {
+          path: ':alias',
+          component: () => import('@/views/CategoryView.vue'),
+        },
+      ],
     },
   ],
   history: createWebHistory(),
