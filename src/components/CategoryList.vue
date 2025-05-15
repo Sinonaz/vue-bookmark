@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useCategoriesStore } from '@/stores/categories.store.ts'
+import { useCategoriesStore } from '@/stores/categories.store'
 import { onMounted } from 'vue'
 import ButtonIcon from '@/components/ButtonIcon.vue'
 import IconPlus from '@/components/icons/IconPlus.vue'

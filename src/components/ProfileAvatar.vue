@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useProfileStore } from '@/stores/profile.store.ts'
+import { useProfileStore } from '@/stores/profile.store'
 import { onMounted } from 'vue'
 
 const store = useProfileStore()

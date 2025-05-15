@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { CategoryInterface } from '@/interfaces/category.interface.ts'
-import { API_ROUTES, http } from '@/api.ts'
+import type { CategoryInterface } from '@/interfaces/category.interface'
+import { API_ROUTES, http } from '@/api'
 import { v4 as uuidv4 } from 'uuid'
 
 export const useCategoriesStore = defineStore('categories', () => {
@@ -22,5 +22,13 @@ export const useCategoriesStore = defineStore('categories', () => {
     categories.value.push(data)
   }
 
-  return { categories, fetchCategories, createCategory }
+  function getCategoryByAlias(alias: string | string[]): CategoryInterface | undefined {
+    if (typeof alias == 'string') {
+      return categories.value.find((c) => c.alias == alias)
+    }
+
+    return
+  }
+
+  return { categories, fetchCategories, createCategory, getCategoryByAlias }
 })

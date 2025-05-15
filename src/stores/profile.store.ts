@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { ProfileInterface } from '@/interfaces/profile.interface.ts'
-import { API_ROUTES, http } from '@/api.ts'
+import type { ProfileInterface } from '@/interfaces/profile.interface'
+import { API_ROUTES, http } from '@/api'
 
 export const useProfileStore = defineStore('profile', () => {
   const profile = ref<ProfileInterface>()
