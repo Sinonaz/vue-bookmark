@@ -5,6 +5,7 @@ export const API_BASE = 'http://localhost:3000/api'
 export const API_ROUTES = {
   profile: '/profile',
   categories: '/categories',
+  updateCategory: (id: number) => `/categories/${id}`,
   bookmarks: (id: number) => `/categories/${id}/bookmarks`,
   auth: {
     login: '/auth/login',

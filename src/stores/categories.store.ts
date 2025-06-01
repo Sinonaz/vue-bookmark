@@ -30,5 +30,14 @@ export const useCategoriesStore = defineStore('categories', () => {
     return
   }
 
-  return { categories, fetchCategories, createCategory, getCategoryByAlias }
+  async function updateCategory(category: CategoryInterface): Promise<CategoryInterface> {
+    const { data } = await http().put<CategoryInterface>(API_ROUTES.updateCategory(category.id), {
+      name: category.name,
+      alias: category.alias,
+    })
+
+    return data
+  }
+
+  return { categories, fetchCategories, createCategory, getCategoryByAlias, updateCategory }
 })
