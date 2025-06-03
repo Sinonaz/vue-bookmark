@@ -6,6 +6,7 @@ export const API_ROUTES = {
   profile: '/profile',
   categories: '/categories',
   updateCategory: (id: number) => `/categories/${id}`,
+  deleteCategory: (id: number) => `/categories/${id}`,
   bookmarks: (id: number) => `/categories/${id}/bookmarks`,
   auth: {
     login: '/auth/login',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useCategoriesStore } from '@/stores/categories.store'
 import { ref, watch } from 'vue'
 import type { CategoryInterface } from '@/interfaces/category.interface'
@@ -11,6 +11,7 @@ import IconPencil from '@/components/icons/IconPencil.vue'
 import NameInput from '@/components/NameInput.vue'
 
 const route = useRoute()
+const router = useRouter()
 const categoryStore = useCategoriesStore()
 const bookmarksStore = useBookmarksStore()
 
@@ -27,6 +28,8 @@ watch(
 
     if (category.value) {
       bookmarksStore.fetchBookmarks(category.value.id)
+    } else {
+      router.push({ name: 'index' })
     }
   },
   { immediate: true },
@@ -38,6 +41,17 @@ function editCategoryName(newName: string) {
   category.value.name = newName
   categoryStore.updateCategory(category.value)
   isCategoryNameEditing.value = false
+}
+
+function deleteCategory(id: number | undefined) {
+  if (!id) return
+
+  categoryStore.deleteCategory(id)
+  categoryStore.fetchCategories()
+
+  if (!categoryStore.categories.length) {
+    router.push({ name: 'index' })
+  }
 }
 </script>
 
@@ -55,7 +69,7 @@ function editCategoryName(newName: string) {
       />
 
       <div class="category__actions">
-        <ActionBtn>
+        <ActionBtn @click="deleteCategory(category?.id)">
           <IconBox />
         </ActionBtn>
         <ActionBtn @click="isCategoryNameEditing = !isCategoryNameEditing">
