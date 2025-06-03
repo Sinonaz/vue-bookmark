@@ -12,5 +12,10 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
     bookmarks.value = data
   }
 
-  return { bookmarks, fetchBookmarks }
+  async function deleteBookmark(id: number, categoryId: number) {
+    await http().delete(API_ROUTES.deleteBookmarks(id))
+    await fetchBookmarks(categoryId)
+  }
+
+  return { bookmarks, fetchBookmarks, deleteBookmark }
 })

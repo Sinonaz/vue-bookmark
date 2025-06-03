@@ -2,8 +2,15 @@
 import IconTrash from '@/components/icons/IconTrash.vue'
 import IconLink from '@/components/icons/IconLink.vue'
 import type { BookmarkInterface } from '@/interfaces/bookmark.interface'
+import { useBookmarksStore } from '@/stores/bookmarks.store.ts'
 
-const { title, image } = defineProps<BookmarkInterface>()
+const { title, image, url, id, category_id } = defineProps<BookmarkInterface>()
+
+const bookmarkStore = useBookmarksStore()
+
+function openLink() {
+  window.open(url, '_blank')
+}
 </script>
 
 <template>
@@ -12,10 +19,14 @@ const { title, image } = defineProps<BookmarkInterface>()
     <p class="bookmark__text">{{ title }}</p>
 
     <div class="bookmark__footer">
-      <button class="bookmark__btn" type="button">
+      <button
+        class="bookmark__btn"
+        type="button"
+        @click="bookmarkStore.deleteBookmark(id, category_id)"
+      >
         <IconTrash />
       </button>
-      <button class="bookmark__btn" type="button">
+      <button class="bookmark__btn" type="button" @click="openLink">
         <IconLink />
       </button>
     </div>
