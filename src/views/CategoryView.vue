@@ -9,6 +9,7 @@ import ActionBtn from '@/components/ActionBtn.vue'
 import IconBox from '@/components/icons/IconBox.vue'
 import IconPencil from '@/components/icons/IconPencil.vue'
 import NameInput from '@/components/NameInput.vue'
+import BookmarkSort from '@/components/BookmarkSort.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -17,6 +18,7 @@ const bookmarksStore = useBookmarksStore()
 
 const category = ref<CategoryInterface>()
 const isCategoryNameEditing = ref(false)
+const sortType = ref('date')
 
 watch(
   () => ({
@@ -53,6 +55,13 @@ function deleteCategory(id: number | undefined) {
     router.push({ name: 'index' })
   }
 }
+
+function updateSortType(type: string) {
+  if (!category.value) return
+
+  sortType.value = type
+  bookmarksStore.fetchBookmarks(category.value.id, type)
+}
 </script>
 
 <template>
@@ -77,6 +86,13 @@ function deleteCategory(id: number | undefined) {
         </ActionBtn>
       </div>
     </div>
+
+    <BookmarkSort
+      :sort-type
+      v-if="bookmarksStore.bookmarks.length"
+      class="category__sort"
+      @update:sort="(type) => updateSortType(type)"
+    />
 
     <div v-if="bookmarksStore.bookmarks.length" class="category__bookmarks">
       <BookmarkCard
@@ -121,5 +137,9 @@ function deleteCategory(id: number | undefined) {
     outline: none;
     font-size: inherit;
   }
+}
+
+.category__sort {
+  margin-top: 40px;
 }
 </style>
