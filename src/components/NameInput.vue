@@ -1,16 +1,22 @@
 <script setup lang="ts">
 import ActionBtn from '@/components/ActionBtn.vue'
 import IconSuccess from '@/components/icons/IconSuccess.vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const value = defineModel<string>()
 const { placeholder } = defineProps<{ placeholder?: string }>()
 const emit = defineEmits(['update:name'])
 
+const showError = ref<boolean>(false)
+
 const error = computed(() => !value.value?.length)
 
 function onChangeName() {
-  if (error.value) return
+  if (error.value) {
+    showError.value = true
+
+    return
+  }
 
   emit('update:name', value.value)
 }
@@ -22,7 +28,7 @@ function onChangeName() {
       type="text"
       v-model="value"
       :placeholder
-      :style="{ borderColor: error ? 'red' : 'var(--color-fg)' }"
+      :style="{ borderColor: showError && error ? 'red' : 'var(--color-fg)' }"
     />
 
     <ActionBtn @click="onChangeName">

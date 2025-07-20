@@ -10,6 +10,7 @@ import IconBox from '@/components/icons/IconBox.vue'
 import IconPencil from '@/components/icons/IconPencil.vue'
 import NameInput from '@/components/NameInput.vue'
 import BookmarkSort from '@/components/BookmarkSort.vue'
+import CreateCard from '@/components/CreateCard.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -105,6 +106,7 @@ function updateSortType(type: string) {
         :created_at="bookmark.created_at"
         :image="bookmark.image"
       />
+      <CreateCard />
     </div>
   </div>
 </template>

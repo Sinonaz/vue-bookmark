@@ -4,5 +4,5 @@ export interface BookmarkInterface {
   url: string
   title: string
   created_at: string
-  image: string
+  image?: string
 }
