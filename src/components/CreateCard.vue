@@ -2,7 +2,7 @@
 import ButtonIcon from '@/components/ButtonIcon.vue'
 import IconPlus from '@/components/icons/IconPlus.vue'
 import NameInput from '@/components/NameInput.vue'
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useBookmarksStore } from '@/stores/bookmarks.store.ts'
 import type { CategoryInterface } from '@/interfaces/category.interface.ts'
@@ -45,6 +45,7 @@ watch(
       v-model="bookmarkUrl"
       placeholder="Вставьте ссылку"
       @update:name="(value) => createBookmark(value)"
+      is-focused
     />
   </div>
 </template>

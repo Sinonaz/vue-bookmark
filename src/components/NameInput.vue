@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import ActionBtn from '@/components/ActionBtn.vue'
 import IconSuccess from '@/components/icons/IconSuccess.vue'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref, useTemplateRef } from 'vue'
 
 const value = defineModel<string>()
-const { placeholder } = defineProps<{ placeholder?: string }>()
+const { placeholder, isFocused = false } = defineProps<{
+  placeholder?: string
+  isFocused?: boolean
+}>()
 const emit = defineEmits(['update:name'])
 
 const showError = ref<boolean>(false)
+const input = useTemplateRef<HTMLInputElement>('input')
 
 const error = computed(() => !value.value?.length)
 
@@ -20,6 +24,12 @@ function onChangeName() {
 
   emit('update:name', value.value)
 }
+
+onMounted(() => {
+  if (!isFocused || !input.value) return
+
+  input.value.focus()
+})
 </script>
 
 <template>
@@ -29,6 +39,7 @@ function onChangeName() {
       v-model="value"
       :placeholder
       :style="{ borderColor: showError && error ? 'red' : 'var(--color-fg)' }"
+      ref="input"
     />
 
     <ActionBtn @click="onChangeName">

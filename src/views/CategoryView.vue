@@ -76,6 +76,7 @@ function updateSortType(type: string) {
         v-else
         :model-value="category?.name"
         @update:name="(newName) => editCategoryName(newName)"
+        is-focused
       />
 
       <div class="category__actions">
